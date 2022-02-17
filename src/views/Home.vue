@@ -1,6 +1,6 @@
 <template>
   <div>
-    <el-button type="primary" icon="el-icon-plus" circle @click="dialogvisible = true" style="margin-bottom: 10px; background-color: #6867AC"></el-button>
+    <el-button type="danger" icon="el-icon-plus" circle @click="dialogvisible = true" style="margin-bottom: 10px;"></el-button>
     <div class="container">
       <table>
         <tr>
@@ -16,6 +16,9 @@
               @click="changeFinish(t.id)"
               class="checkbox"
             />
+          </td>
+          <td>
+            <el-button type="danger" icon="el-icon-delete" circle @click="deleteTask(t.id)"></el-button>
           </td>
         </tr>
       </table>
@@ -45,6 +48,13 @@
         this.$store.getters.getFinished(id).isFinished = !this.$store.getters.getFinished(id).isFinished;
         return this.$store.getters.getFinished(id).isFinished;
       },
+      deleteTask(id){
+        var index = this.$store.getters.getTodoList.map(function(item) {
+          return item.Id
+        }).indexOf(id);
+
+        this.$store.getters.getTodoList.splice(index, 1);
+      }
     },
   };
 </script>
